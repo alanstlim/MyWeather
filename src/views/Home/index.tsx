@@ -43,7 +43,6 @@ const Home: React.FC = () => {
   const handleGetGeolocation = useCallback(async () => {
     Geolocation.getCurrentPosition(
       async ({ coords }) => {
-        console.log(coords);
         await handleRequest(undefined, { lat: coords.latitude, long: coords.longitude });
       },
       () => {
