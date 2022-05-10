@@ -18,6 +18,7 @@ import { useTheme } from 'styled-components';
 const Home: React.FC = () => {
   const theme = useTheme();
   const [weatherData, setWeatherData] = useState({} as GetWeatherResponse);
+  const [currentLocation, setCurrentLocation] = useState('');
   const [isCelsius, setIsCelsius] = useState(true);
   const { value, setValue } = useSearch();
 
@@ -31,6 +32,7 @@ const Home: React.FC = () => {
         setWeatherData(data);
         if (currentLocation) {
           setValue(data.name);
+          setCurrentLocation(data.name);
         }
       })
       .catch((error: Error | AxiosError | any) => {
@@ -39,9 +41,15 @@ const Home: React.FC = () => {
   }, []);
 
   const handleGetGeolocation = useCallback(async () => {
-    Geolocation.getCurrentPosition(async ({ coords }) => {
-      await handleRequest(undefined, { lat: coords.latitude, long: coords.longitude });
-    });
+    Geolocation.getCurrentPosition(
+      async ({ coords }) => {
+        console.log(coords);
+        await handleRequest(undefined, { lat: coords.latitude, long: coords.longitude });
+      },
+      () => {
+        handleRequest('Lisboa');
+      }
+    );
   }, [handleRequest]);
 
   const handleToggleSwitch = useCallback(
@@ -85,7 +93,13 @@ const Home: React.FC = () => {
             onValueChange={handleToggleSwitch}
           />
           <St.LocationButton onPress={handleGetGeolocation}>
-            <Icon name="crosshairs-gps" size={28} color={theme.colors.primary[700]} />
+            <Icon
+              name="crosshairs-gps"
+              size={28}
+              color={
+                currentLocation === value ? theme.colors.primary[700] : theme.colors.secondary[400]
+              }
+            />
           </St.LocationButton>
         </Components.RowContainer>
       </Components.RowContainer>
