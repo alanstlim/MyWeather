@@ -31,9 +31,9 @@ const WeatherCard: React.FC<Props> = ({ address, weather, unit = 'metric', icon 
 
   const formattedTemperature = useMemo(() => {
     return {
-      temperature: `${weather.temperature.toFixed(1)}°${unitTemperature}` ?? 'Unkown',
-      temperatureMax: `${weather.temperatureMax.toFixed(1)}°${unitTemperature}` ?? 'Unkown',
-      temperatureMin: `${weather.temperatureMin.toFixed(1)}°${unitTemperature}` ?? 'Unkown',
+      temperature: `${weather.temperature.toFixed(1)}°${unitTemperature}` ?? 'Unknown',
+      temperatureMax: `${weather.temperatureMax.toFixed(1)}°${unitTemperature}` ?? 'Unknown',
+      temperatureMin: `${weather.temperatureMin.toFixed(1)}°${unitTemperature}` ?? 'Unknown',
     };
   }, [unitTemperature, weather]);
 
