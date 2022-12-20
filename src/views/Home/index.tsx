@@ -22,7 +22,7 @@ const Home: React.FC = () => {
   const [currentLocation, setCurrentLocation] = useState('');
   const [isCelsius, setIsCelsius] = useState(true);
   const { value, setValue } = useSearch();
-  const { cities, setCities, saveHistory } = useHistory();
+  const { cities, saveHistory } = useHistory();
 
   const handleRequest = useCallback(
     async (placeName?: string, currentLocation?: Coords) => {
@@ -37,20 +37,18 @@ const Home: React.FC = () => {
             setValue(data.name);
             setCurrentLocation(data.name);
           }
-
           cities.unshift(data.name);
           const newHistory = [...new Set(cities)];
           if (newHistory.length > 10) {
             newHistory.pop();
           }
-          setCities(newHistory);
-          saveHistory();
+          saveHistory(newHistory);
         })
         .catch((error: Error | AxiosError | any) => {
           console.error(error.response);
         });
     },
-    [cities]
+    [cities, saveHistory]
   );
 
   const handleGetGeolocation = useCallback(async () => {

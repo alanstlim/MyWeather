@@ -4,8 +4,7 @@ import { defaultCities } from 'utils/constants';
 
 type HistoryContextData = {
   cities: string[];
-  setCities(cities: string[]): void;
-  saveHistory(): void;
+  saveHistory(history: string[]): void;
 };
 
 const HistoryContext = createContext<HistoryContextData>({} as HistoryContextData);
@@ -13,25 +12,26 @@ const HistoryContext = createContext<HistoryContextData>({} as HistoryContextDat
 const HistoryProvider: React.FC = ({ children }) => {
   const [cities, setCities] = useState<string[]>([]);
 
-  const saveHistory = useCallback(() => {
-    Storage.setItem<StorageType.IHistory>(StorageKeys.CITIES, {
-      cities,
-    });
+  const saveHistory = useCallback((history: string[]) => {
+    if (history.length >= 10) {
+      Storage.setItem<StorageType.IHistory>(StorageKeys.CITIES, {
+        cities: history,
+      });
+      setCities(history);
+    }
   }, []);
 
   useEffect(() => {
+    setCities(defaultCities);
     Storage.getItem<StorageType.IHistory>(StorageKeys.CITIES).then((history) => {
       if (history) {
-        return setCities(history.cities);
+        saveHistory(history.cities);
       }
-      return setCities(defaultCities);
     });
   }, [saveHistory]);
 
   return (
-    <HistoryContext.Provider value={{ cities, setCities, saveHistory }}>
-      {children}
-    </HistoryContext.Provider>
+    <HistoryContext.Provider value={{ cities, saveHistory }}>{children}</HistoryContext.Provider>
   );
 };
 
