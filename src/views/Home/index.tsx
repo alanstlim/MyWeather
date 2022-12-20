@@ -38,15 +38,13 @@ const Home: React.FC = () => {
             setCurrentLocation(data.name);
           }
 
-          if (placeName) {
-            cities.unshift(data.name);
-            const newHistory = [...new Set(cities)];
-            if (newHistory.length > 10) {
-              newHistory.pop();
-            }
-            setCities(newHistory);
-            saveHistory();
+          cities.unshift(data.name);
+          const newHistory = [...new Set(cities)];
+          if (newHistory.length > 10) {
+            newHistory.pop();
           }
+          setCities(newHistory);
+          saveHistory();
         })
         .catch((error: Error | AxiosError | any) => {
           console.error(error.response);
