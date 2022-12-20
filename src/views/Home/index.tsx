@@ -14,6 +14,7 @@ import { getWeather } from 'useCases/weather';
 import { removeUnitFromTheme } from 'utils/theme';
 import { useSearch } from 'hooks/useSearch';
 import { useTheme } from 'styled-components';
+import { useHistory } from 'hooks/useHistory';
 
 const Home: React.FC = () => {
   const theme = useTheme();
@@ -21,24 +22,38 @@ const Home: React.FC = () => {
   const [currentLocation, setCurrentLocation] = useState('');
   const [isCelsius, setIsCelsius] = useState(true);
   const { value, setValue } = useSearch();
+  const { cities, setCities, saveHistory } = useHistory();
 
-  const handleRequest = useCallback(async (cityName?: string, currentLocation?: Coords) => {
-    const payload: GetWeatherRequest = {
-      currentLocation: currentLocation,
-      anotherLocation: cityName,
-    };
-    await getWeather({ ...payload })
-      .then(({ data }) => {
-        setWeatherData(data);
-        if (currentLocation) {
-          setValue(data.name);
-          setCurrentLocation(data.name);
-        }
-      })
-      .catch((error: Error | AxiosError | any) => {
-        console.log(error.response);
-      });
-  }, []);
+  const handleRequest = useCallback(
+    async (placeName?: string, currentLocation?: Coords) => {
+      const payload: GetWeatherRequest = {
+        currentLocation: currentLocation,
+        anotherLocation: placeName,
+      };
+      await getWeather({ ...payload })
+        .then(({ data }) => {
+          setWeatherData(data);
+          if (currentLocation) {
+            setValue(data.name);
+            setCurrentLocation(data.name);
+          }
+
+          if (placeName) {
+            cities.unshift(data.name);
+            const newHistory = [...new Set(cities)];
+            if (newHistory.length > 10) {
+              newHistory.pop();
+            }
+            setCities(newHistory);
+            saveHistory();
+          }
+        })
+        .catch((error: Error | AxiosError | any) => {
+          console.error(error.response);
+        });
+    },
+    [cities]
+  );
 
   const handleGetGeolocation = useCallback(async () => {
     Geolocation.getCurrentPosition(

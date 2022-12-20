@@ -6,6 +6,7 @@ import { Typographic } from 'components';
 import { removeUnitFromTheme } from 'utils/theme';
 import { useSearch } from 'hooks/useSearch';
 import { useTheme } from 'styled-components';
+import { useHistory } from 'hooks/useHistory';
 
 type Props = {
   onPress: (city: string) => void;
@@ -14,19 +15,7 @@ type Props = {
 const FilterList: React.FC<Props> = ({ onPress }) => {
   const theme = useTheme();
   const { setValue, value } = useSearch();
-
-  const cities = [
-    'Lisboa',
-    'Madrid',
-    'Paris',
-    'Berlim',
-    'Copenhaga',
-    'Roma',
-    'Londres',
-    'Dublin',
-    'Praga',
-    'Viena',
-  ];
+  const { cities } = useHistory();
 
   const handlePress = useCallback(
     (city: string) => {
@@ -41,7 +30,7 @@ const FilterList: React.FC<Props> = ({ onPress }) => {
       horizontal
       contentContainerStyle={{ paddingEnd: removeUnitFromTheme(theme.spacings.large) }}
     >
-      {cities.map((city, index) => (
+      {cities?.map((city, index) => (
         <St.FilterButton selected={value === city} onPress={() => handlePress(city)} key={index}>
           <Typographic.Description
             color={value === city ? theme.colors.secondary[100] : theme.colors.secondary[700]}

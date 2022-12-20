@@ -1,5 +1,6 @@
 enum ASYNC_STORAGE_KEYS {
   UNIT = 'UNIT',
+  CITIES = 'CITIES',
 }
 
 export default ASYNC_STORAGE_KEYS;
