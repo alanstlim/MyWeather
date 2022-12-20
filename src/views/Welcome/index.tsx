@@ -2,7 +2,7 @@ import * as St from './styles';
 
 import { Components, Typographic } from 'components';
 import { Image, PermissionsAndroid } from 'react-native';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 import { ASSETS } from 'assets';
 import { useNavigation } from '@react-navigation/native';
@@ -33,6 +33,10 @@ const Welcome: React.FC = () => {
       }
     };
     requestLocationPermission();
+  }, []);
+
+  useEffect(() => {
+    handlePermission();
   }, []);
 
   return (
