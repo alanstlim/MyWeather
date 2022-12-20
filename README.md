@@ -1,6 +1,6 @@
 # MyWeather
 
-<img src="https://github.com/alanstlim/PokeApi/blob/master/screens.png" alt="drawing" width="700"/>
+<img src="https://github.com/alanstlim/MyWeather/blob/master/ecra1.jpeg" alt="drawing" width="300"/><img src="https://github.com/alanstlim/MyWeather/blob/master/ecra2.jpeg" alt="drawing" width="300"/>
 
 ## About it
 * APP created for React Native Engineer Recruitment Challenge by Wit Software.
@@ -29,5 +29,5 @@ Use command: yarn start or react-native run-android (for start the project)
 
 You can download the APK
 
-[MyWeather.apk](https://drive.google.com/file/d/1n1Q7dQgc5rQ3MzKZUMuqsKhSS13zFAsd/view?usp=sharing)
+[MyWeather.apk](https://drive.google.com/file/d/1-7sitT8kI59FRszbOyGGS3hKrAuphofS/view?usp=sharing)
 
