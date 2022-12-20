@@ -20,6 +20,7 @@ const THEMES = {
       600: '#393942',
       700: '#080713',
     },
+    blur: '#F3F3F399',
   },
   fontSize: {
     small: `${RFPercentage(2)}px`,
