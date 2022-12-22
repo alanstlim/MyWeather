@@ -3,7 +3,7 @@
 <img src="https://github.com/alanstlim/MyWeather/blob/master/ecra1.jpeg" alt="drawing" width="300"/><img src="https://github.com/alanstlim/MyWeather/blob/master/ecra2.jpeg" alt="drawing" width="300"/>
 
 ## About it
-* APP created for React Native Engineer Recruitment Challenge by Wit Software.
+* APP created for React Native Engineer Recruitment Challenge.
 
 >"Get weather infos for current location or another cities."
 
