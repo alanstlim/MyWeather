@@ -10,11 +10,13 @@
 ## Features
 - [x] Get weather of current location.
   
-- [x] Get weather of Lisboa, Madrid, Paris, Berlim, Copenhaga, Roma, Londres, Dublin, Praga e Viena.
+- [x] Get weather of  Lisbon, Madrid, Paris, Berlin, Copenhagen, Rome, London, Dublin, Prague, Vienna.
 
 - [x] Get weather of any location. 
 
 - [x] Change between Celsius and Fahrenheit.
+
+- [x] History of last cities searched.
 
 - [ ] Configure project for iOS (i don't have a mac)
 
